@@ -8,30 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
+exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
-const swagger_1 = require("@nestjs/swagger");
-let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
+let UserService = class UserService {
+    constructor(userModel) {
+        this.userModel = userModel;
     }
-    getHello() {
-        return this.appService.getHello();
+    async findAll() {
+        return this.userModel.find().exec();
+    }
+    async create(user) {
+        const newUser = new this.userModel(user);
+        return newUser.save();
     }
 };
-exports.AppController = AppController;
-__decorate([
-    (0, common_1.Get)('/test-api'),
-    (0, swagger_1.ApiResponse)({ status: 200 }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, swagger_1.ApiTags)('example'),
-    (0, common_1.Controller)('example'),
-    __metadata("design:paramtypes", [app_service_1.AppService])
-], AppController);
-//# sourceMappingURL=app.controller.js.map
+exports.UserService = UserService;
+exports.UserService = UserService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)('User')),
+    __metadata("design:paramtypes", [mongoose_2.Model])
+], UserService);
+//# sourceMappingURL=user.service.js.map

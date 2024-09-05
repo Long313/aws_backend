@@ -9,29 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
+exports.PostController = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
 const swagger_1 = require("@nestjs/swagger");
-let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+const post_service_1 = require("./post.service");
+let PostController = class PostController {
+    constructor(postService) {
+        this.postService = postService;
     }
     getHello() {
-        return this.appService.getHello();
+        return 'hello';
     }
 };
-exports.AppController = AppController;
+exports.PostController = PostController;
 __decorate([
-    (0, common_1.Get)('/test-api'),
+    (0, common_1.Get)('/'),
     (0, swagger_1.ApiResponse)({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, swagger_1.ApiTags)('example'),
-    (0, common_1.Controller)('example'),
-    __metadata("design:paramtypes", [app_service_1.AppService])
-], AppController);
-//# sourceMappingURL=app.controller.js.map
+], PostController.prototype, "getHello", null);
+exports.PostController = PostController = __decorate([
+    (0, swagger_1.ApiTags)('post'),
+    (0, common_1.Controller)('post'),
+    __metadata("design:paramtypes", [post_service_1.PostService])
+], PostController);
+//# sourceMappingURL=post.controller.js.map
