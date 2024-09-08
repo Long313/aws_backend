@@ -5,7 +5,7 @@ import { ResponseDto } from 'src/common/dto/respon_dto';
 export declare class PostController {
     private readonly postService;
     constructor(postService: PostService);
-    getAllPosts(): Promise<PostEntity[]>;
+    getAllPosts(): Promise<ResponseDto<PostEntity[]>>;
     createPost(postDto: PostDto): Promise<ResponseDto<PostEntity>>;
     getPost(id: string): Promise<ResponseDto<PostEntity>>;
     increaseView(id: string): Promise<ResponseDto<PostEntity>>;

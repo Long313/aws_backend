@@ -16,16 +16,13 @@ exports.PostController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const post_service_1 = require("./post.service");
-const post_entity_1 = require("./entity/post.entity");
-const class_transformer_1 = require("class-transformer");
 const post_dto_1 = require("./dto/post.dto");
 let PostController = class PostController {
     constructor(postService) {
         this.postService = postService;
     }
     async getAllPosts() {
-        const posts = await this.postService.findAll();
-        return (0, class_transformer_1.plainToInstance)(post_entity_1.PostEntity, posts);
+        return this.postService.findAll();
     }
     async createPost(postDto) {
         return this.postService.create(postDto);

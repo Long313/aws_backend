@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PostService } from './post.service';
 import { PostEntity } from './entity/post.entity';
-import { plainToInstance } from 'class-transformer';
 import { PostDto } from './dto/post.dto';
 import { ResponseDto } from 'src/common/dto/respon_dto';
 
@@ -12,9 +11,8 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get('/all')
-  async getAllPosts(): Promise<PostEntity[]> {
-    const posts = await this.postService.findAll();
-    return plainToInstance(PostEntity, posts);
+  async getAllPosts(): Promise<ResponseDto<PostEntity[]>> {
+    return this.postService.findAll();
   }
 
   @Post()

@@ -24,7 +24,8 @@ let PostService = class PostService {
         this.postModel = postModel;
     }
     async findAll() {
-        return this.postModel.find().exec();
+        const posts = await this.postModel.find().exec();
+        return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, posts, 'User created successfully');
     }
     async create(postDto) {
         const post = new post_model_1.default({

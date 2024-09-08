@@ -10,8 +10,14 @@ import { BSON } from 'mongodb';
 @Injectable()
 export class PostService {
   constructor(@InjectModel('Post') private postModel: Model<PostEntity>) {}
-  async findAll(): Promise<PostEntity[]> {
-    return this.postModel.find().exec();
+  async findAll(): Promise<ResponseDto<PostEntity[]>> {
+    const posts = await this.postModel.find().exec();
+
+    return new ResponseDto<PostEntity[]>(
+      HttpStatus.OK,
+      posts,
+      'User created successfully',
+    );
   }
 
   async create(postDto: PostDto): Promise<ResponseDto<PostEntity>> {
