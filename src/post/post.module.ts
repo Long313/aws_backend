@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostController } from './post.controller';
 import { PostService } from './post.service';
+import { PostSchema } from './entity/post.entity';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:@Long12345@aws.qxyab.mongodb.net/?retryWrites=true&w=majority&appName=aws',
-    ),
+    MongooseModule.forFeature([{ name: 'Post', schema: PostSchema }]), // Đăng ký mô hình
   ],
   controllers: [PostController],
   providers: [PostService],

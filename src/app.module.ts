@@ -8,7 +8,7 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://tranxuanlonga555:%40Long12345@blog.jwawe.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=blog',
+      'mongodb+srv://tranxuanlonga555:%40Long12345@aws.95kyn.mongodb.net/?retryWrites=true&w=majority&appName=aws',
     ), // Kết nối với MongoDB
     PostModule,
     UserModule,

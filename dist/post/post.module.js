@@ -11,13 +11,14 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const post_controller_1 = require("./post.controller");
 const post_service_1 = require("./post.service");
+const post_entity_1 = require("./entity/post.entity");
 let PostModule = class PostModule {
 };
 exports.PostModule = PostModule;
 exports.PostModule = PostModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://admin:@Long12345@aws.qxyab.mongodb.net/?retryWrites=true&w=majority&appName=aws'),
+            mongoose_1.MongooseModule.forFeature([{ name: 'Post', schema: post_entity_1.PostSchema }]),
         ],
         controllers: [post_controller_1.PostController],
         providers: [post_service_1.PostService],

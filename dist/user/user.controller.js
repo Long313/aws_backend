@@ -15,19 +15,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
+const user_entity_1 = require("./entity/user.entity");
+const user_dto_1 = require("./dto/user.dto");
+const swagger_1 = require("@nestjs/swagger");
+const class_transformer_1 = require("class-transformer");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
     async findAll() {
-        return this.userService.findAll();
+        const users = await this.userService.findAll();
+        return (0, class_transformer_1.plainToInstance)(user_entity_1.UserEntity, users);
     }
-    async create(user) {
-        return this.userService.create(user);
+    async create(userDto) {
+        return this.userService.create(userDto);
     }
 };
 exports.UserController = UserController;
 __decorate([
+    (0, common_1.Get)(),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -37,11 +43,12 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [user_dto_1.UserDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "create", null);
 exports.UserController = UserController = __decorate([
-    (0, common_1.Controller)('users'),
+    (0, swagger_1.ApiTags)('user'),
+    (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

@@ -5,11 +5,9 @@ import { UserService } from './user.service';
 import { UserSchema } from './user.schema'; // Thêm schema User
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]), // Đăng ký mô hình
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
   controllers: [UserController],
   providers: [UserService],
-  exports: [UserService], // Xuất UserService nếu cần sử dụng ở module khác
+  exports: [UserService],
 })
 export class UserModule {}
