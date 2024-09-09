@@ -7,7 +7,11 @@ import * as mongoose from 'mongoose';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:3000', // Cho phép từ một domain cụ thể
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
 
   await mongoose.connect(
     'mongodb+srv://tranxuanlonga555:%40Long12345@aws.95kyn.mongodb.net/?retryWrites=true&w=majority&appName=aws',

@@ -38,4 +38,12 @@ export class PostController {
   ): Promise<ResponseDto<PostEntity>> {
     return this.postService.increaseLike(id);
   }
+
+  @Put('/update/:id')
+  async updatePost(
+    @Param('id') id: string,
+    @Body() postDto: PostDto,
+  ): Promise<ResponseDto<PostEntity>> {
+    return this.postService.update(id, postDto);
+  }
 }

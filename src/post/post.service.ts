@@ -21,12 +21,14 @@ export class PostService {
   }
 
   async create(postDto: PostDto): Promise<ResponseDto<PostEntity>> {
+    const currentDate = new Date();
     const post = new Post({
       title: postDto.title,
       description: postDto.description,
       author: postDto.author,
       likes: 0,
       views: 0,
+      createdDate: currentDate,
     });
     const isExist = await this.postModel.findOne({
       title: postDto.title,
@@ -46,6 +48,52 @@ export class PostService {
         return new ResponseDto<PostEntity>(
           HttpStatus.OK,
           savedPost,
+          'User created successfully',
+        );
+      } else {
+        return new ResponseDto<PostEntity>(
+          HttpStatus.BAD_REQUEST,
+          null,
+          'User created failed',
+        );
+      }
+    } catch (error) {
+      console.error('Error saving user:', error);
+      throw new Error(`Error creating user: ${error.message}`);
+    }
+  }
+
+  async update(id: string, postDto: PostDto): Promise<ResponseDto<PostEntity>> {
+    const currentDate = new Date();
+    const nid = new BSON.ObjectId(id);
+    const post = new Post({
+      title: postDto.title,
+      description: postDto.description,
+      author: postDto.author,
+      likes: postDto.likes,
+      views: postDto.views,
+      lastUpdateDate: currentDate,
+    });
+    const isExist = await this.postModel.findOne({
+      title: postDto.title,
+      description: postDto.description,
+      author: postDto.author,
+    });
+    if (isExist) {
+      return new ResponseDto<PostEntity>(
+        HttpStatus.BAD_REQUEST,
+        null,
+        'User already exist',
+      );
+    }
+    try {
+      const newPost = await this.postModel.findByIdAndUpdate(nid, post, {
+        new: true,
+      });
+      if (newPost) {
+        return new ResponseDto<PostEntity>(
+          HttpStatus.OK,
+          newPost,
           'User created successfully',
         );
       } else {
@@ -112,6 +160,7 @@ export class PostService {
     if (!Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid ID format');
     }
+    console.log('id', id);
     const nid = new BSON.ObjectId(id);
     const post = await this.postModel.findOne({
       _id: nid,

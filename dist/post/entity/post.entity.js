@@ -35,6 +35,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], PostEntity.prototype, "likes", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: false }),
+    __metadata("design:type", Date)
+], PostEntity.prototype, "createdDate", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: false }),
+    __metadata("design:type", Date)
+], PostEntity.prototype, "lastUpdateDate", void 0);
 exports.PostEntity = PostEntity = __decorate([
     (0, mongoose_1.Schema)()
 ], PostEntity);

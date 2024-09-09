@@ -7,6 +7,7 @@ export declare class PostService {
     constructor(postModel: Model<PostEntity>);
     findAll(): Promise<ResponseDto<PostEntity[]>>;
     create(postDto: PostDto): Promise<ResponseDto<PostEntity>>;
+    update(id: string, postDto: PostDto): Promise<ResponseDto<PostEntity>>;
     findOne(id: string): Promise<ResponseDto<PostEntity>>;
     increaseView(id: string): Promise<ResponseDto<PostEntity>>;
     increaseLike(id: string): Promise<ResponseDto<PostEntity>>;

@@ -17,6 +17,12 @@ export class PostEntity extends Document {
 
   @Prop({ required: true })
   likes: number;
+
+  @Prop({ required: false })
+  createdDate?: Date;
+
+  @Prop({ required: false })
+  lastUpdateDate?: Date;
 }
 
 export const PostSchema = SchemaFactory.createForClass(PostEntity);

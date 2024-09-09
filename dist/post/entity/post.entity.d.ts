@@ -5,6 +5,8 @@ export declare class PostEntity extends Document {
     author: string;
     views: number;
     likes: number;
+    createdDate?: Date;
+    lastUpdateDate?: Date;
 }
 export declare const PostSchema: import("mongoose").Schema<PostEntity, import("mongoose").Model<PostEntity, any, any, any, Document<unknown, any, PostEntity> & PostEntity & Required<{
     _id: unknown;

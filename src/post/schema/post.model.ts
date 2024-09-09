@@ -6,6 +6,8 @@ const postSchema = new mongoose.Schema({
   author: { type: String, required: true },
   views: { type: Number, required: true },
   likes: { type: Number, required: true },
+  createdDate: { type: Date, required: false },
+  lastUpdateDate: { type: Date, required: false },
 });
 
 const Post = mongoose.model('Post', postSchema);

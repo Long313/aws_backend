@@ -36,6 +36,9 @@ let PostController = class PostController {
     async increaseLike(id) {
         return this.postService.increaseLike(id);
     }
+    async updatePost(id, postDto) {
+        return this.postService.update(id, postDto);
+    }
 };
 exports.PostController = PostController;
 __decorate([
@@ -72,6 +75,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "increaseLike", null);
+__decorate([
+    (0, common_1.Put)('/update/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, post_dto_1.PostDto]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "updatePost", null);
 exports.PostController = PostController = __decorate([
     (0, swagger_1.ApiTags)('post'),
     (0, common_1.Controller)('post'),

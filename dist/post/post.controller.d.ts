@@ -10,4 +10,5 @@ export declare class PostController {
     getPost(id: string): Promise<ResponseDto<PostEntity>>;
     increaseView(id: string): Promise<ResponseDto<PostEntity>>;
     increaseLike(id: string): Promise<ResponseDto<PostEntity>>;
+    updatePost(id: string, postDto: PostDto): Promise<ResponseDto<PostEntity>>;
 }
