@@ -4,7 +4,7 @@ import { PostEntity } from './entity/post.entity';
 import { Model, Types } from 'mongoose';
 import { PostDto } from './dto/post.dto';
 import Post from './schema/post.model';
-import { ResponseDto } from 'src/common/dto/respon_dto';
+import { ResponseDto } from 'src/common/dto/response_dto';
 import { BSON } from 'mongodb';
 
 @Injectable()

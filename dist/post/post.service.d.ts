@@ -1,7 +1,7 @@
 import { PostEntity } from './entity/post.entity';
 import { Model } from 'mongoose';
 import { PostDto } from './dto/post.dto';
-import { ResponseDto } from 'src/common/dto/respon_dto';
+import { ResponseDto } from 'src/common/dto/response_dto';
 export declare class PostService {
     private postModel;
     constructor(postModel: Model<PostEntity>);

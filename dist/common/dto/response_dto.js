@@ -9,4 +9,4 @@ class ResponseDto {
     }
 }
 exports.ResponseDto = ResponseDto;
-//# sourceMappingURL=respon_dto.js.map
+//# sourceMappingURL=response_dto.js.map

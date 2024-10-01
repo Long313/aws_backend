@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const post_model_1 = require("./schema/post.model");
-const respon_dto_1 = require("../common/dto/respon_dto");
+const response_dto_1 = require("../common/dto/response_dto");
 const mongodb_1 = require("mongodb");
 let PostService = class PostService {
     constructor(postModel) {
@@ -25,7 +25,7 @@ let PostService = class PostService {
     }
     async findAll() {
         const posts = await this.postModel.find().exec();
-        return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, posts, 'User created successfully');
+        return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, posts, 'User created successfully');
     }
     async create(postDto) {
         const currentDate = new Date();
@@ -43,15 +43,15 @@ let PostService = class PostService {
             author: postDto.author,
         });
         if (isExist) {
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User already exist');
+            return new response_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User already exist');
         }
         try {
             const savedPost = await post.save();
             if (savedPost) {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, savedPost, 'User created successfully');
+                return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, savedPost, 'User created successfully');
             }
             else {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User created failed');
+                return new response_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User created failed');
             }
         }
         catch (error) {
@@ -76,17 +76,17 @@ let PostService = class PostService {
             author: postDto.author,
         });
         if (isExist) {
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User already exist');
+            return new response_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User already exist');
         }
         try {
             const newPost = await this.postModel.findByIdAndUpdate(nid, post, {
                 new: true,
             });
             if (newPost) {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'User created successfully');
+                return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'User created successfully');
             }
             else {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User created failed');
+                return new response_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User created failed');
             }
         }
         catch (error) {
@@ -103,7 +103,7 @@ let PostService = class PostService {
             const post = await this.postModel.findOne({
                 _id: nid,
             });
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, post, 'User created successfully');
+            return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, post, 'User created successfully');
         }
         catch (error) {
             throw new Error(`Error get post: ${error.message}`);
@@ -122,7 +122,7 @@ let PostService = class PostService {
                 ...post,
                 views: post.views++,
             }, { new: true });
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'View of post increase 1 point');
+            return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'View of post increase 1 point');
         }
         catch (error) {
             throw new Error(`Error post: ${error.message}`);
@@ -142,7 +142,7 @@ let PostService = class PostService {
                 ...post,
                 likes: post.likes++,
             }, { new: true });
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'Like of post increase 1 point');
+            return new response_dto_1.ResponseDto(common_1.HttpStatus.OK, newPost, 'Like of post increase 1 point');
         }
         catch (error) {
             throw new Error(`Error post: ${error.message}`);

@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { PostService } from './post.service';
 import { PostEntity } from './entity/post.entity';
 import { PostDto } from './dto/post.dto';
-import { ResponseDto } from 'src/common/dto/respon_dto';
+import { ResponseDto } from 'src/common/dto/response_dto';
 
 @ApiTags('post')
 @Controller('post')

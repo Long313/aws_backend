@@ -16,48 +16,12 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const bcrypt = require("bcrypt");
-const user_model_1 = require("./schema/user.model");
-const respon_dto_1 = require("../common/dto/respon_dto");
 let UserService = class UserService {
     constructor(userModel) {
         this.userModel = userModel;
     }
     async findAll() {
         return this.userModel.find().exec();
-    }
-    async create(userDto) {
-        console.log('User DTO:', userDto);
-        const hashedPassword = await bcrypt.hash(userDto.password, 10);
-        const user = new user_model_1.default({
-            name: userDto.name,
-            birthday: new Date(userDto.birthday),
-            email: userDto.email,
-            password: hashedPassword,
-            gender: userDto.gender,
-        });
-        const isExist = await this.userModel.findOne({
-            name: user.name,
-            birthday: user.birthday,
-            email: user.email,
-        });
-        console.log('isExist', isExist);
-        if (isExist) {
-            return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User already exist');
-        }
-        try {
-            const savedUser = await user.save();
-            if (savedUser) {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.OK, savedUser, 'User created successfully');
-            }
-            else {
-                return new respon_dto_1.ResponseDto(common_1.HttpStatus.BAD_REQUEST, null, 'User created failed');
-            }
-        }
-        catch (error) {
-            console.error('Error saving user:', error);
-            throw new Error(`Error creating user: ${error.message}`);
-        }
     }
 };
 exports.UserService = UserService;
